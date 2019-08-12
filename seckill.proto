@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package seckill;
+
+message SeckillRequest {
+  //1、2、3是属性顺序号，属性顺序号是protobuf为了提高数据的压缩和可选性等功能定义的，需要按照顺序进行定义，且不允许有重复。
+  string usrname = 1; 
+  string usrkey = 2;
+}
+
+message SeckillResponse {
+  string result = 1;
+}
+
+service SeckillService {
+  //grpc允许四种类型的service方法
+  //简单RPC，客户端发送简单请求，得到简单响应，类似于一个函数调用
+  //如果是双向流式RPC，那么是：rpc seckill(stream SeckillRequest) returns (stream seckillResponse) {}
+  rpc seckill(SeckillRequest) returns (SeckillResponse);
+}
